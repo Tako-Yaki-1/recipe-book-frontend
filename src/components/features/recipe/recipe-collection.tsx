@@ -74,22 +74,31 @@ export function RecipeCollection() {
 
   // The page supplies the header; this feature owns the collection and its dialog.
   return (
-    <><>
-        {/* Collection heading and primary action wrap on narrow screens. */}
-        <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-          <div><h2 className="text-2xl font-semibold tracking-tight">Your recipes</h2><p className="mt-1 text-sm text-emerald-950/60">{recipes.length} saved {recipes.length === 1 ? "recipe" : "recipes"} to inspire your next meal</p></div>
-          <Button onClick={openForm}>Add Recipe</Button>
+    <>
+      {/* Recipe count and the primary action wrap on narrow screens. */}
+      <div className="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-ink/15 pb-4">
+        <p className="text-base text-ink/70">{recipes.length} saved {recipes.length === 1 ? "recipe" : "recipes"}</p>
+        <Button onClick={openForm}>Add recipe</Button>
+      </div>
+
+      {error && <p role="alert" className="mb-6 border-l-4 border-tomato bg-white p-4">{error}</p>}
+
+      {recipes.length === 0 ? (
+        <div className="max-w-md py-12">
+          <h2 className="text-2xl font-bold tracking-tight">No recipes yet</h2>
+          <p className="mt-2 text-base text-ink/70">Add a recipe you cook often, or one you want to try.</p>
+          <Button className="mt-6" onClick={openForm}>Add your first recipe</Button>
         </div>
-        {error && <p role="alert" className="mb-4 text-sm text-red-600">{error}</p>}
-        {recipes.length === 0 ? <div className="rounded-2xl border border-dashed border-emerald-900/25 bg-[#f7f8f0] px-6 py-16 text-center"><h3 className="text-xl font-semibold">A fresh page for your favorites</h3><p className="mt-2 text-sm text-emerald-950/65">Save a family classic or something new you want to try.</p><Button className="mt-6" onClick={openForm}>Add your first recipe</Button></div> :
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {recipes.map((recipe) => <RecipeCard key={recipe.id} {...recipe} onDelete={handleDelete} />)}
-          </div>}
-        {/* Add the saved recipe to local state so the list updates immediately. */}
-        <Modal open={open} onClose={closeForm} title="Add Recipe">
-          <AddRecipeForm onSuccess={handleCreated} />
-        </Modal>
-      </>
+      ) : (
+        <div className="grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+          {recipes.map((recipe) => <RecipeCard key={recipe.id} {...recipe} onDelete={handleDelete} />)}
+        </div>
+      )}
+
+      {/* Add the saved recipe to local state so the list updates immediately. */}
+      <Modal open={open} onClose={closeForm} title="Add recipe">
+        <AddRecipeForm onSuccess={handleCreated} />
+      </Modal>
     </>
   );
 }

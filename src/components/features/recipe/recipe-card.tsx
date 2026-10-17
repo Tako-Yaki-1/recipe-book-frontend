@@ -1,5 +1,4 @@
 import { Link } from "react-router";
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tag } from "@/components/ui/tag";
 import RecipeMeta from "@/components/common/recipe-meta";
@@ -18,15 +17,19 @@ type RecipeCardProps = {
 
 export default function RecipeCard({id, image, name, cuisine, mealType, difficulty, cookTimeMinutes, tags, onDelete}: RecipeCardProps) {
   return (
-    <Card className="group flex h-full flex-col transition-shadow hover:shadow-lg hover:shadow-emerald-950/10">
-      <div className="h-56 overflow-hidden bg-emerald-100">
-        <img src={image} alt={name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-      </div>
+    <article className="flex h-full flex-col">
+      {/* The photo and the title go to the same place, so only the title is announced to screen readers. */}
+      <Link to={`/recipe/${id}`} tabIndex={-1} aria-hidden="true" className="block overflow-hidden rounded-sm bg-glaze">
+        <img src={image} alt="" className="aspect-[4/3] w-full object-cover" />
+      </Link>
 
-      <div className="flex flex-1 flex-col gap-4 p-5">
-        <h3 className="text-lg font-semibold tracking-tight text-emerald-950">{name}</h3>
+      <div className="mt-4 flex flex-1 flex-col gap-3">
+        <h3 className="text-2xl leading-tight font-bold tracking-tight">
+          <Link to={`/recipe/${id}`} className="underline-offset-4 hover:underline">{name}</Link>
+        </h3>
 
         <RecipeMeta
+          compact
           cuisine={cuisine}
           mealType={mealType}
           difficulty={difficulty}
@@ -39,15 +42,12 @@ export default function RecipeCard({id, image, name, cuisine, mealType, difficul
           ))}
         </div>
 
-        <div className="grid grid-cols-2 gap-2 mt-auto pt-2">
-          <Link to={`/recipe/${id}`}>
-            <Button className="w-full">View</Button>
-          </Link>
-          <Button onClick={() => onDelete(id)} className="bg-rose-50 text-rose-700 hover:bg-rose-100">
+        <div className="mt-auto pt-2">
+          <Button variant="danger" onClick={() => onDelete(id)}>
             Delete
           </Button>
         </div>
       </div>
-    </Card>
+    </article>
   );
 }

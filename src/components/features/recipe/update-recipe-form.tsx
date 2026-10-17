@@ -63,7 +63,7 @@ export default function UpdateRecipeForm({ recipe, onSuccess }: UpdateRecipeForm
       </div>
 
       <div>
-        <Label htmlFor="update-recipe-cook-time">Cook Time (minutes)</Label>
+        <Label htmlFor="update-recipe-cook-time">Cook time (minutes)</Label>
         <Input id="update-recipe-cook-time" type="number" min="0" value={cookTimeMinutes} onChange={(e) => setCookTimeMinutes(Number(e.target.value))} />
       </div>
 
@@ -77,9 +77,9 @@ export default function UpdateRecipeForm({ recipe, onSuccess }: UpdateRecipeForm
         <Textarea id="update-recipe-instructions" value={instructions} onChange={(e) => setInstructions(e.target.value)} rows={5} />
       </div>
 
-      {error && <p role="alert" className="text-sm text-red-600 sm:col-span-2">{error}</p>}
+      {error && <p role="alert" className="text-sm text-tomato sm:col-span-2">{error}</p>}
       <Button type="submit" className="w-full sm:col-span-2">
-        Save Changes
+        Save changes
       </Button>
     </form>
   );

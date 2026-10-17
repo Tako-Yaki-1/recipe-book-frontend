@@ -8,8 +8,8 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 export function Input({ className, error, ...props }: InputProps) {
   return (
     <div>
-      <input className={cn("w-full rounded-xl border bg-white/60 px-3 py-2.5 text-sm text-emerald-950 outline-none focus:border-emerald-700 focus:ring-2 focus:ring-emerald-700/15", error ? "border-red-500" : "border-emerald-900/15", className)} {...props} />
-      {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
+      <input className={cn("w-full rounded-md border bg-white px-3 py-2.5 text-base text-ink outline-none transition-[border-color,box-shadow] duration-150 placeholder:text-ink/50 focus:border-towel focus:ring-2 focus:ring-towel/30", error ? "border-tomato" : "border-ink/55", className)} aria-invalid={error ? true : undefined} {...props} />
+      {error && <p className="mt-1 text-sm text-tomato">{error}</p>}
     </div>
   );
 }

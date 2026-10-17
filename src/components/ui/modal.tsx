@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useEffect, useId, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 
 type ModalProps = {
@@ -8,14 +8,40 @@ type ModalProps = {
   children: ReactNode;
 };
 
+// A side sheet: full screen on phones, a panel from the right edge on larger screens.
 export function Modal({ open, onClose, title, children }: ModalProps) {
+  const titleId = useId();
+
+  // Let people close the sheet with the Escape key.
+  useEffect(function listenForEscape() {
+    if (!open) return;
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") onClose();
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    function cleanup() {
+      document.removeEventListener("keydown", handleKeyDown);
+    }
+
+    return cleanup;
+  }, [open, onClose]);
+
   if (!open) return null;
 
   return (
-    <div className="fixed top-0 left-0 right-0 bottom-0 z-50 flex items-stretch justify-center bg-emerald-950/60 backdrop-blur-sm lg:items-center lg:p-4" onClick={onClose}>
-      <div className="flex h-full w-full flex-col bg-[#eef3e8] text-emerald-950 lg:h-auto lg:max-h-[90vh] lg:max-w-2xl lg:rounded-2xl lg:border lg:border-emerald-900/15" onClick={(e) => e.stopPropagation()}>
-        <div className="flex shrink-0 items-center justify-between border-b border-emerald-900/15 px-6 py-4">
-          <h2 className="text-lg font-medium">{title}</h2>
+    <div className="fixed inset-0 z-50 flex justify-end bg-ink/50" onClick={onClose}>
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        className="animate-sheet flex h-full w-full flex-col bg-plate text-ink motion-reduce:animate-none sm:max-w-xl sm:border-l-2 sm:border-ink"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex shrink-0 items-center justify-between border-b border-ink/15 px-6 py-4">
+          <h2 id={titleId} className="text-2xl font-bold tracking-tight">{title}</h2>
           <Button variant="tertiary" onClick={onClose}>
             Close
           </Button>

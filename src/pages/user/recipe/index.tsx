@@ -8,9 +8,15 @@ export default function RecipePage() {
   // The page reads the URL; the feature fetches and displays that recipe.
   return (
     <Section>
-      <Link to="/user" className="text-sm font-medium text-emerald-800 hover:text-emerald-950">
-        ← Back to recipes
-      </Link>
+      <div className="pb-4">
+        <Link to="/user" className="inline-flex items-center gap-2 text-sm font-semibold text-towel underline-offset-4 hover:text-ink hover:underline">
+          <svg aria-hidden="true" viewBox="0 0 20 20" className="size-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12.5 4.5 7 10l5.5 5.5" />
+          </svg>
+          Back to recipes
+        </Link>
+      </div>
+      <div aria-hidden="true" className="towel-rule text-towel" />
 
       {id && <RecipeDetails key={id} id={id} />}
     </Section>

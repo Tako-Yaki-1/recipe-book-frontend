@@ -52,15 +52,15 @@ export function AdminRecipes() {
 
   return (
     <section aria-label="All recipes">
-      <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-        <p>{loading ? "Loading recipes…" : `${recipes.length} recipes across all users`}</p>
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-ink/15 pb-4">
+        <p className="text-base text-ink/70">{loading ? "Loading recipes…" : `${recipes.length} recipes across all users`}</p>
         <Button variant="secondary" disabled={loading} onClick={handleRefresh}>
           Refresh
         </Button>
       </div>
 
       {error ? (
-        <p role="alert" className="rounded-xl bg-rose-50 p-4 text-rose-700">{error}</p>
+        <p role="alert" className="border-l-4 border-tomato bg-white p-4">{error}</p>
       ) : (
         <AdminRecipesTable recipes={recipes} loading={loading} />
       )}

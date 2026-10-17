@@ -4,6 +4,7 @@ import { useAuth } from "@/components/context/use-auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { PasswordInput } from "@/components/ui/password-input";
 
 function getErrorMessage(error: unknown) {
   if (typeof error === "object" && error !== null && "response" in error) {
@@ -47,11 +48,14 @@ export function LoginForm() {
       </div>
       <div>
         <Label htmlFor="auth-password">Password</Label>
-        <Input id="auth-password" type="password" autoComplete={"current-password"} required minLength={1} value={password} onChange={(event) => setPassword(event.target.value)} />
+        <PasswordInput id="auth-password" autoComplete={"current-password"} required minLength={1} value={password} onChange={(event) => setPassword(event.target.value)} />
       </div>
 
-      {error && <p role="alert" className="text-sm text-red-600">{error}</p>}
-      <Button type="submit" disabled={busy} className="mt-1 bg-emerald-900 py-3 font-medium hover:bg-emerald-950 disabled:cursor-wait disabled:opacity-60">{busy ? "Please wait…" : "Sign in"}</Button>
+      {error && <p role="alert" className="animate-nudge text-sm text-tomato motion-reduce:animate-none">{error}</p>}
+      <Button type="submit" disabled={busy} className="mt-2 w-full gap-2 disabled:cursor-wait">
+        {busy && <span aria-hidden="true" className="size-4 animate-spin rounded-full border-2 border-white/40 border-t-white motion-reduce:animate-none" />}
+        {busy ? "Signing in…" : "Sign in"}
+      </Button>
     </form>
   );
 }

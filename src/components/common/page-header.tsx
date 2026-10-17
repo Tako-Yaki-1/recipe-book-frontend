@@ -1,22 +1,26 @@
 import type { ReactNode } from "react";
+import { Link } from "react-router";
 
 type PageHeaderProps = {
-  eyebrow: string;
   title: string;
-  description: string;
+  description?: string;
   children?: ReactNode;
 };
 
-// Shared page heading. Optional children provide actions such as Sign out.
-export function PageHeader({ eyebrow, title, description, children }: PageHeaderProps) {
+// Top bar with the app name and account actions, the towel stripe, then the page title.
+// Optional children provide actions such as Sign out.
+export function PageHeader({ title, description, children }: PageHeaderProps) {
   return (
-    <header className="mb-8 flex flex-wrap items-center justify-between gap-6 rounded-3xl bg-emerald-950 p-6 text-amber-50 sm:p-8">
-      <div>
-        <p className="text-xs tracking-widest text-emerald-200 uppercase">{eyebrow}</p>
-        <h1 className="mt-3 text-3xl font-semibold">{title}</h1>
-        <p className="mt-2 text-sm text-emerald-100/80">{description}</p>
+    <header>
+      <div className="flex flex-wrap items-center justify-between gap-4 pb-4">
+        <Link to="/" className="text-lg font-bold tracking-tight">Recipe Book</Link>
+        {children}
       </div>
-      {children}
+      <div aria-hidden="true" className="towel-rule text-towel" />
+      <div className="pt-10 pb-8 sm:pt-14">
+        <h1 className="text-4xl leading-none font-bold tracking-tight sm:text-6xl">{title}</h1>
+        {description && <p className="mt-4 max-w-prose text-base text-ink/70">{description}</p>}
+      </div>
     </header>
   );
 }

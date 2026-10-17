@@ -127,12 +127,12 @@ export default function AddRecipeForm({ onSuccess }: AddRecipeFormProps) {
       </div>
 
       <div>
-        <Label htmlFor="recipe-cook-time" error={errors.cookTimeMinutes}>Cook Time (minutes)</Label>
+        <Label htmlFor="recipe-cook-time" error={errors.cookTimeMinutes}>Cook time (minutes)</Label>
         <Input id="recipe-cook-time" type="number" min="0" value={cookTimeMinutes} onChange={(e) => { setCookTimeMinutes(e.target.value); checkField("cookTimeMinutes", e.target.value); }} onBlur={() => checkField("cookTimeMinutes", cookTimeMinutes)} error={errors.cookTimeMinutes} />
       </div>
 
       <div className="sm:col-span-2">
-        <Label htmlFor="recipe-meal-type" error={errors.mealType}>Meal Type (one per line)</Label>
+        <Label htmlFor="recipe-meal-type" error={errors.mealType}>Meal type (one per line)</Label>
         <Textarea
           id="recipe-meal-type" value={mealType} onChange={(e) => { setMealType(e.target.value); checkField("mealType", e.target.value); }} onBlur={() => checkField("mealType", mealType)} rows={3} placeholder={"Breakfast\nLunch\nDinner"} error={errors.mealType} />
       </div>
@@ -155,9 +155,9 @@ export default function AddRecipeForm({ onSuccess }: AddRecipeFormProps) {
           id="recipe-instructions" value={instructions} onChange={(e) => { setInstructions(e.target.value); checkField("instructions", e.target.value); }} onBlur={() => checkField("instructions", instructions)} rows={3} error={errors.instructions} />
       </div>
 
-      {submitError && <p role="alert" className="text-sm text-red-600 sm:col-span-2">{submitError}</p>}
+      {submitError && <p role="alert" className="text-sm text-tomato sm:col-span-2">{submitError}</p>}
       <Button type="submit" className="w-full sm:col-span-2">
-        Add Recipe
+        Add recipe
       </Button>
     </form>
   );

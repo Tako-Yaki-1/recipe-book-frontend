@@ -1,5 +1,5 @@
 import { Table } from "@/components/ui/table";
-import { Tag } from "@/components/ui/tag";
+import { Difficulty } from "@/components/common/difficulty";
 import type { AdminRecipe } from "@/services/recipe-service";
 
 export type { AdminRecipe } from "@/services/recipe-service";
@@ -22,13 +22,13 @@ export function AdminRecipesTable({ recipes, loading }: AdminRecipesTableProps) 
           <th scope="col">Difficulty</th>
           <th scope="col">Cook time</th>
           <th scope="col">Owner ID</th>
-          <th scope="col">Owner Name</th>
+          <th scope="col">Owner name</th>
         </tr>
       </thead>
       <tbody>
         {!loading && recipes.length === 0 && (
           <tr>
-            <td colSpan={7} className="text-center">No recipes have been created yet.</td>
+            <td colSpan={7} className="py-10!">No recipes have been created yet.</td>
           </tr>
         )}
         {recipes.map(function renderRecipe(recipe) {
@@ -36,14 +36,14 @@ export function AdminRecipesTable({ recipes, loading }: AdminRecipesTableProps) 
             <tr key={recipe.id}>
               <td>
                 <div className="flex min-w-48 items-center gap-3">
-                  <img src={recipe.image} alt="" className="h-12 w-12 rounded-lg object-cover" />
-                  <span className="font-medium">{recipe.name}</span>
+                  <img src={recipe.image} alt="" className="size-12 rounded-sm bg-glaze object-cover" />
+                  <span className="font-semibold">{recipe.name}</span>
                 </div>
               </td>
               <td>{recipe.cuisine}</td>
               <td>{recipe.mealType.join(", ")}</td>
-              <td><Tag>{recipe.difficulty}</Tag></td>
-              <td>{recipe.cookTimeMinutes} mins</td>
+              <td><Difficulty level={recipe.difficulty} /></td>
+              <td>{recipe.cookTimeMinutes} min</td>
               <td className="font-mono text-xs">{recipe.userId}</td>
               <td>{recipe.ownerName || "Unnamed user"}</td>
             </tr>

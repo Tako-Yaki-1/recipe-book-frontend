@@ -46,7 +46,7 @@ Use meaningful names and ordinary named functions such as `async function handle
 
 ### Common: share application UI
 
-Put UI here when it is useful across different features. [PageHeader](../src/components/common/page-header.tsx) accepts a title, description, eyebrow text, and optional action elements. `RecipeMeta` displays the recipe facts used by both cards and details.
+Put UI here when it is useful across different features. [PageHeader](../src/components/common/page-header.tsx) accepts a title, an optional description, and optional action elements. It also draws the app name and the towel stripe above the title. `RecipeMeta` displays the recipe facts used by both cards and details.
 
 Auth-only headings stay in `components/features/auth`, because their purpose is specific to authentication.
 

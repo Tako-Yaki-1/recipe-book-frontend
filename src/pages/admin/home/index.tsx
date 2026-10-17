@@ -20,14 +20,14 @@ export default function AdminPage() {
 
   return (
     <Section>
-      <PageHeader eyebrow="Recipe Book · Administration" title="All recipes" description="Browse recipes across every account.">
-        <div className="flex flex-wrap items-center gap-4">
+      <PageHeader title="All recipes" description="Browse recipes across every account.">
+        <div className="flex flex-wrap items-center gap-4 text-sm">
           <span>{user?.name}</span>
-          <Button variant="secondary" onClick={handleLogout}>Sign out</Button>
+          <Button variant="tertiary" onClick={handleLogout}>Sign out</Button>
         </div>
       </PageHeader>
 
-      {error && <p role="alert" className="mb-6 text-rose-700">{error}</p>}
+      {error && <p role="alert" className="mb-6 text-tomato">{error}</p>}
 
       <AdminRecipes />
     </Section>

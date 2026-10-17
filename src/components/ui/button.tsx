@@ -2,19 +2,20 @@ import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "primary" | "secondary" | "tertiary";
+  variant?: "primary" | "secondary" | "tertiary" | "danger";
   children: ReactNode;
 };
 
 const variants = {
-  primary: "bg-emerald-900 text-amber-50 hover:bg-emerald-950",
-  secondary: "border border-emerald-900/20 bg-emerald-50 text-emerald-900 hover:bg-emerald-100",
-  tertiary: "text-emerald-800 hover:text-emerald-950",
+  primary: "bg-towel text-white hover:bg-towel-deep",
+  secondary: "border border-towel text-towel hover:bg-glaze",
+  tertiary: "text-towel underline underline-offset-4 hover:text-ink",
+  danger: "border border-tomato/50 text-tomato hover:bg-tomato hover:text-white",
 };
 
 export function Button({ variant = "primary", className, children, type = "button", ...props }: ButtonProps) {
   return (
-    <button type={type} className={cn("cursor-pointer rounded-xl px-4 py-2.5 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 disabled:cursor-not-allowed disabled:opacity-60", variants[variant], className)} {...props}>
+    <button type={type} className={cn("inline-flex min-h-11 cursor-pointer items-center justify-center rounded-md px-4 py-2 text-sm font-semibold transition-[background-color,color,transform] active:translate-y-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-towel disabled:cursor-not-allowed disabled:opacity-60", variants[variant], className)} {...props}>
       {children}
     </button>
   );

@@ -7,7 +7,7 @@ type SectionProps = {
 export function Section({ children }: SectionProps) {
   // Shared page width and responsive padding keep every screen aligned.
   return (
-    <section className="max-w-7xl mx-auto px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+    <section className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-10 lg:px-8">
       {children}
     </section>
   );
